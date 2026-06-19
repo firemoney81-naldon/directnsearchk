@@ -1,23 +1,712 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+    <style>
+        /* Modern CSS Variables & Visual Hierarchy */
+        :root {
+            --primary: #0F172A;
+            --primary-light: #1E293B;
+            --accent: #EA580C;
+            --accent-hover: #C2410C;
+            --bg-main: #F8FAFC;
+            --bg-card: #FFFFFF;
+            --text-main: #334155;
+            --text-dark: #0F172A;
+            --border-color: #E2E8F0;
+            --highlight-bg: #FFF7ED;
+            --highlight-border: #FED7AA;
+            --teal-bg: #F0FDFA;
+            --teal-border: #CCFBF1;
+            --teal-text: #115E59;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+        }
+
+        body { 
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.8; 
+            background-color: var(--bg-main); 
+            color: var(--text-main); 
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { 
+            width: 100%; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 24px; 
+            box-sizing: border-box; 
+        }
+
+        /* Header Style */
+        header { 
+            background-color: var(--primary); 
+            color: white; 
+            padding: 40px 0; 
+            border-bottom: 4px solid var(--accent); 
+            box-shadow: var(--shadow-md);
+        }
+        header h1 { 
+            margin: 0; 
+            font-size: 2.2em; 
+            text-align: center; 
+            font-weight: 800; 
+            letter-spacing: -0.03em;
+        }
+        header p {
+            text-align: center;
+            margin: 10px 0 0 0;
+            color: #94A3B8;
+            font-size: 1.1em;
+        }
+
+        /* Navigation Style */
+        nav { 
+            background-color: white; 
+            padding: 4px; 
+            margin-bottom: 30px; 
+            border-radius: 12px; 
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-color);
+        }
+        .main-menu { 
+            list-style: none; 
+            padding: 0; 
+            margin: 0; 
+            display: flex; 
+            justify-content: space-around; 
+            flex-wrap: wrap;
+        }
+        .main-menu li { 
+            margin: 4px; 
+        }
+        .main-menu li a { 
+            display: block; 
+            padding: 12px 24px; 
+            text-decoration: none; 
+            color: var(--primary-light); 
+            font-weight: 700; 
+            font-size: 1em; 
+            border-radius: 8px;
+            transition: all 0.2s ease-in-out; 
+        }
+        .main-menu li a:hover { 
+            background-color: var(--highlight-bg); 
+            color: var(--accent); 
+        }
+
+        /* Layout Structure (Flexbox) */
+        .content-wrap { 
+            display: flex; 
+            gap: 30px; 
+        }
+        .sidebar { 
+            flex: 0 0 320px; 
+            padding: 24px; 
+            background-color: var(--bg-card); 
+            border-radius: 16px; 
+            box-shadow: var(--shadow-md); 
+            align-self: flex-start; 
+            border: 1px solid var(--border-color);
+        }
+        .main-content { 
+            flex: 1; 
+            padding: 40px; 
+            background-color: var(--bg-card); 
+            border-radius: 16px; 
+            box-shadow: var(--shadow-md); 
+            border: 1px solid var(--border-color);
+        }
+
+        /* Sidebar Elements */
+        .sidebar h2 { 
+            color: var(--primary); 
+            font-size: 1.35em; 
+            margin-top: 0; 
+            border-bottom: 2px solid var(--accent); 
+            padding-bottom: 12px; 
+            font-weight: 800;
+        }
+        .sub-menu { 
+            list-style: none; 
+            padding: 0; 
+            margin: 20px 0; 
+        }
+        .sub-menu li a { 
+            display: block; 
+            padding: 12px 0; 
+            text-decoration: none; 
+            color: var(--text-main); 
+            border-bottom: 1px dashed var(--border-color); 
+            font-size: 0.95em;
+            transition: all 0.2s ease; 
+        }
+        .sub-menu li a:hover { 
+            color: var(--accent); 
+            padding-left: 8px; 
+            font-weight: 700; 
+        }
+
+        /* Interactive Simulator Styles */
+        .calculator-section { 
+            background-color: var(--bg-main); 
+            padding: 24px; 
+            border-radius: 12px; 
+            border: 1px solid var(--border-color); 
+            margin-bottom: 30px; 
+        }
+        .calculator-section h3 { 
+            color: var(--primary); 
+            font-size: 1.2em; 
+            margin-top: 0; 
+            font-weight: 800;
+        }
+        .calculator-section p {
+            font-size: 0.9em;
+            color: var(--text-main);
+            margin-bottom: 15px;
+        }
+        .calculator-section label { 
+            display: block; 
+            margin-top: 15px; 
+            font-weight: 700; 
+            color: var(--primary-light); 
+            font-size: 0.9em;
+        }
+        .calculator-section input[type="text"],
+        .calculator-section input[type="number"],
+        .calculator-section select { 
+            width: 100%; 
+            padding: 12px; 
+            border: 1px solid var(--border-color); 
+            border-radius: 8px; 
+            margin-top: 6px; 
+            box-sizing: border-box; 
+            background-color: white;
+            font-size: 0.95em;
+            color: var(--text-dark);
+        }
+        .calculator-section button { 
+            width: 100%; 
+            padding: 14px; 
+            background-color: var(--accent); 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            font-size: 1em; 
+            font-weight: 800; 
+            cursor: pointer; 
+            margin-top: 20px; 
+            transition: background-color 0.2s ease-in-out; 
+            box-shadow: var(--shadow-sm);
+        }
+        .calculator-section button:hover { 
+            background-color: var(--accent-hover); 
+        }
+
+        /* Main Content Typography */
+        .main-content h2 { 
+            color: var(--primary); 
+            font-size: 1.85em; 
+            border-bottom: 2px solid var(--border-color); 
+            padding-bottom: 12px; 
+            margin-top: 40px; 
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+        .main-content h3 { 
+            color: var(--primary-light); 
+            font-size: 1.45em; 
+            margin-top: 30px; 
+            border-left: 5px solid var(--accent); 
+            padding-left: 14px; 
+            font-weight: 800;
+        }
+        .main-content p { 
+            color: var(--text-main); 
+            margin-bottom: 1.5em; 
+            text-align: justify; 
+            font-size: 1.05em;
+        }
+
+        /* Elegant Visual Highlight Box */
+        .highlight { 
+            background-color: var(--highlight-bg); 
+            border-left: 5px solid var(--accent); 
+            padding: 24px; 
+            border-radius: 0 12px 12px 0; 
+            margin: 25px 0; 
+            color: var(--text-dark); 
+        }
+        .highlight p { 
+            margin: 0; 
+            line-height: 1.7; 
+            font-weight: 500;
+        }
+
+        /* Data Tables */
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin: 25px 0; 
+            font-size: 0.95em; 
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+        table th, table td { 
+            border: 1px solid var(--border-color); 
+            padding: 14px; 
+            text-align: left; 
+        }
+        table th { 
+            background-color: var(--primary); 
+            color: white; 
+            font-weight: 700; 
+        }
+        table tr:nth-child(even) { 
+            background-color: var(--bg-main); 
+        }
+
+        /* CSS-based Bar Chart Representation */
+        .chart-container {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: var(--bg-main);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        .chart-title {
+            font-size: 1.1em;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        .chart-bar-wrapper {
+            margin-bottom: 12px;
+        }
+        .chart-label {
+            font-size: 0.9em;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--text-main);
+        }
+        .chart-bar-bg {
+            background-color: var(--border-color);
+            border-radius: 6px;
+            height: 20px;
+            width: 100%;
+            overflow: hidden;
+        }
+        .chart-bar-fill {
+            background-color: var(--accent);
+            height: 100%;
+            border-radius: 6px;
+            transition: width 1s ease-in-out;
+        }
+
+        /* FAQ Accordion-like Style */
+        .faq-item {
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+        }
+        .faq-question {
+            font-size: 1.15em;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 0 0 10px 0;
+        }
+        .faq-answer {
+            color: var(--text-main);
+            margin: 0;
+            font-size: 1em;
+        }
+
+        /* Outbound Links */
+        .external-links ul { 
+            list-style: none; 
+            padding: 0; 
+            margin-top: 20px; 
+        }
+        .external-links li {
+            margin-bottom: 8px;
+        }
+        .external-links li a { 
+            display: block; 
+            padding: 14px; 
+            background-color: var(--bg-main); 
+            border-radius: 8px; 
+            text-decoration: none; 
+            color: var(--primary-light); 
+            font-weight: 700;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s ease-in-out; 
+        }
+        .external-links li a:hover { 
+            background-color: var(--highlight-bg); 
+            color: var(--accent); 
+            border-color: var(--highlight-border);
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 900px) {
+            .content-wrap { flex-direction: column; }
+            .sidebar { width: 100%; margin-bottom: 20px; }
+            .main-content { padding: 24px; }
+            .main-menu { flex-direction: column; align-items: stretch; }
+            .main-menu li a { text-align: center; border-bottom: 1px solid var(--border-color); }
+        }
+
+        /* Result Panel for Calculators */
+        .calc-result-panel {
+            margin-top: 20px;
+            padding: 16px;
+            background-color: var(--teal-bg);
+            border: 1px solid var(--teal-border);
+            border-radius: 8px;
+            color: var(--teal-text);
+            display: none;
+        }
+        .calc-result-panel h4 {
+            margin-top: 0;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+            font-weight: 800;
+        }
+    </style>
+
+    <!-- JSON-LD Structured Data for Naver/Google SEO & AI Agent Optimization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "2026년 법인 자동차보험 다이렉트 가입 가이드: 절세 혜택과 연두색 번호판 기준 총정리",
+      "headline": "법인 자동차보험 다이렉트 최적의 비교 및 절세 전략 분석",
+      "description": "2026년 최신 세법 기준 법인 자동차보험 다이렉트 가입 가이드를 상세히 소개합니다. 8천만원 이상 연두색 번호판 장착 기준, 임직원 운전자 한정 운전 특약 설정에 따른 비용인정 조건, 모델별 평균 견적과 최저가 싼곳 비교 요령을 확인할 수 있습니다.",
+      "url": "https://example.com/corporate-direct-car-insurance",
+      "about": {
+        "@type": "Thing",
+        "name": "법인 자동차보험 다이렉트"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "법인 기업 차량 자산 자문 그룹"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "법인 자동차 자산 연구 센터"
+      },
+      "datePublished": "2025-12-15",
+      "dateModified": "2026-06-19"
+    }
+    </script>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1>법인 자동차보험 다이렉트 종합 비교 가이드</h1>
+            <p>2026년 최신 세법 기준 및 연두색 번호판 제도를 활용한 세액 공제 전략</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <nav>
+            <ul class="main-menu">
+                <li><a href="#section_law">법적 의무 및 비용 불산입 리스크</a></li>
+                <li><a href="#section_plate">연두색 번호판 8천만원 기준</a></li>
+                <li><a href="#section_rate">모델별 및 연령별 평균 가격</a></li>
+                <li><a href="#section_discount">할인 특약 및 다이렉트 싼곳</a></li>
+                <li><a href="#section_compare">인터넷 가입 장단점 비교</a></li>
+                <li><a href="#section_community">실사용자 내돈내산 가입 후기</a></li>
+                <li><a href="#section_ai">AI 기반 차량 세무 관리 트렌드</a></li>
+                <li><a href="#section_faq">자주 묻는 질문 FAQ</a></li>
+            </ul>
+        </nav>
+
+        <div class="content-wrap">
+            <div class="sidebar">
+                <h2>실시간 계산 분석 메뉴</h2>
+                <ul class="sub-menu">
+                    <li><a href="#calc_tax">법인 세액 공제 비용계산기</a></li>
+                    <li><a href="#calc_premium">연령별 다이렉트 견적 예측</a></li>
+                    <li><a href="#section_discount">다이렉트 제휴 혜택 알아보기</a></li>
+                    <li><a href="#section_community">보배드림 에펨코리아 후기</a></li>
+                </ul>
+
+                <!-- Dwell-time Booster Widget 1: Tax Deduction Calculator -->
+                <div class="calculator-section" id="calc_tax">
+                    <h3>법인차 비용 처리 세액 계산기</h3>
+                    <p>임직원 전용 보험 가입 여부와 운행기록부 작성 여부에 따른 예상 비용 불산입 및 법인세 환급 금액을 시뮬레이션합니다.</p>
+                    <form onsubmit="calculateTaxBenefit(event);">
+                        <label for="carValueInput">차량 가격 (만원)</label>
+                        <input type="number" id="carValueInput" placeholder="예: 8500" required>
+
+                        <label for="annualExpInput">연간 유지 비용 (만원, 리스료/보험료 포함)</label>
+                        <input type="number" id="annualExpInput" placeholder="예: 1800" required>
+
+                        <label for="insurCheck">임직원 전용 보험 가입 여부</label>
+                        <select id="insurCheck" required>
+                            <option value="yes">가입 완료</option>
+                            <option value="no">미가입</option>
+                        </select>
+
+                        <label for="logCheck">운행기록부 성실 작성 여부</label>
+                        <select id="logCheck" required>
+                            <option value="yes">성실 작성</option>
+                            <option value="no">작성 안함</option>
+                        </select>
+
+                        <button type="submit">절세 세액 시뮬레이션 계산</button>
+                    </form>
+                    <div id="tax_result" class="calc-result-panel"></div>
+                </div>
+
+                <!-- Dwell-time Booster Widget 2: Premium Estimator -->
+                <div class="calculator-section" id="calc_premium">
+                    <h3>법인 차량 다이렉트 견적 계산기</h3>
+                    <p>차량 종류 및 주행 임직원 연령별 범위를 입력하여 평균 예상 금액 차이점을 확인해보세요.</p>
+                    <form onsubmit="estimateCorporatePremium(event);">
+                        <label for="vehicleSegment">차량 등급 브랜드 및 차종</label>
+                        <select id="vehicleSegment" required>
+                            <option value="compact">경차 소형차급 (레이, 캐스퍼)</option>
+                            <option value="medium">중대형 세단 SUV (그랜저, GV70)</option>
+                            <option value="luxury">고가 고급 대형 세단 (제네시스 G90, S클래스)</option>
+                        </select>
+
+                        <label for="driverAgeRange">임직원 최저 운전 나이대</label>
+                        <select id="driverAgeRange" required>
+                            <option value="20">만 21세 이상 지정</option>
+                            <option value="26">만 26세 이상 지정</option>
+                            <option value="30">만 30세 이상 / 임원 한정</option>
+                        </select>
+
+                        <label for="fleetSize">법인 보유 차량 전체 개수</label>
+                        <input type="number" id="fleetSize" placeholder="보유 대수 (예: 3)" required>
+
+                        <button type="submit">예상 다이렉트 보험료 조회</button>
+                    </form>
+                    <div id="premium_result" class="calc-result-panel"></div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <h2 id="section_law">제1장: 2026년 법인 자동차보험 다이렉트 시장의 본질과 법적 의무</h2>
+                <p>법인을 설립하여 운영하는 중소기업 및 대기업 사업주들이 가장 먼저 해결해야 할 세무 처리 핵심 과제 중 하나는 바로 업무용 차량의 합리적인 자산 운용입니다. 법인 소유의 차량은 개인 소유의 자동차와 비교하여 보험 가입 구조와 과세 한도 측면에서 대단히 큰 차이점을 보입니다. 법인 자동차보험 다이렉트는 설계사의 대면 영업 수수료를 생략하고 인터넷 사이트나 모바일 앱, 전용 어플을 통해 직접 가입하는 방식으로, 기업 입장에서는 가입 비용을 크게 절감할 수 있는 추천 통로로 각광받고 있습니다.</p>
+                <p>현행 세법 기준에 따르면, 법인 명의로 신규 등록하거나 리스, 렌트한 업무용 승용차는 국세청으로부터 세무상 경비로 손금인정을 받기 위해 반드시 임직원 전용 자동차보험 특약에 가입되어 있어야 합니다. 만약 이를 이행하지 않을 경우 해당 차량과 관련해 발생하는 모든 금액 즉 감가상각비, 렌트료, 주유비, 자동차 세금 등 연간 유지비 전부를 세액 계산 과정에서 경비로 부인당하게 되는 무서운 불이익을 겪게 됩니다.</p>
+
+                <div class="highlight">
+                    <p>가장 핵심적인 법적 조치로서 법인의 주주나 임원, 직원이 아닌 외부인이 사고를 냈을 때는 보상이 거절될 수 있으며, 중도 가입이나 해지 시에는 가입 일수만큼 일할 계산되어 해당 사업연도 비용 처리에 복잡한 가치 평가 불이익이 따릅니다. 따라서 전문 세무 상담 및 종합 자산 컨설팅을 바탕으로 법인 전용 맞춤 보험의 장단점을 명확하게 규정지어 가입 전략을 세워야 합니다.</p>
+                </div>
+
+                <h2 id="section_plate">제2장: 연두색 번호판 8천만원 기준과 비용 불산입 리스크</h2>
+                <p>자동차 등록 기준의 투명성을 대폭 강화한 연두색 번호판 제도는 고가의 차종을 법인 명의로 유치하여 실질적으로 사적 영역에서 부당 이익을 누리던 악용 사례를 차단하기 위해 제정되었습니다. 2026년 현재 이 규정은 제도 정착 단계에 이르러 국세청의 실시간 모니터링 수단으로 충실히 작용하고 있습니다. 세법이 규정한 공식 기준에 따르면, 부가가치세를 포함하고 공식 할인 금액을 제한 최종 차량 가액이 8,000만 원 이상인 법인 승용자동차는 의무적으로 고유의 연녹색 번호판을 부착해야만 정상적인 회계 비용 인정이 허용됩니다.</p>
+                <p>취득 시점의 자동차등록원부상 가격 또는 장기 렌트 및 리스 업체의 공식 약정 가액이 8천만 원을 초과함에도 불구하고 연두색 번호판을 부착하지 않은 것이 세무 조사 등을 통해 발견되면, 세법상 법인세법 시행령 기준을 어긴 것으로 처리되어 모든 감가상각 비용 한도 적용에서 즉각 제외됩니다. 이에 따라 차량의 가치가 하락하는 데 따른 소득 공제 혜택인 연간 800만 원 한도의 감가상각비 처리가 일절 수포로 돌아가며, 유류비 및 기타 수리 차량 부품 비용 등도 손금 산입이 완전히 차단되는 파멸적인 법인세 가산 위기를 초래할 수 있습니다.</p>
+
+                <div class="chart-container">
+                    <div class="chart-title">연두색 번호판 미부착 시 발생할 수 있는 소득세법 및 법인세법 경비 부인율</div>
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-label">연두색 번호판 정상 장착 법인차량 (세무 인정 비용)</div>
+                        <div class="chart-bar-bg">
+                            <div class="chart-bar-fill" style="width: 100%;"></div>
+                        </div>
+                    </div>
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-label">연두색 번호판 미장착 고가 법인차량 (세무 인정 비용)</div>
+                        <div class="chart-bar-bg">
+                            <div class="chart-bar-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 id="section_rate">제3장: 모델별, 연령별, 나이대별 법인 자동차보험료 요율 구조</h2>
+                <p>업무용으로 법인이 취득하는 자동차들의 보험료는 해당 차량 모델별 가액과 임직원들의 평균 연령대, 나이대 조합에 따라 매년 아주 미세하고 예리하게 차등 적용됩니다. 제네시스 G80 이나 그랜저, 기아 카니발 같은 전통적인 대표 비즈니스 차종들은 보험개발원에서 인정한 차량 모델 등급 평가가 안정적으로 높게 설정되어 있어 동일 금액 대비 기본 보험료가 상대적으로 저렴합니다. 반대로 스포츠 성향이 짙은 외제 고성능 수입차나 수퍼카 부류는 아주 빈번한 사고 발생 이력과 과다한 부품 수리 교체 비용으로 인해 보험 등급이 1등급에 가깝게 하향되어 엄청나게 높은 자차보험 부담금을 내야 합니다.</p>
+                <p>또한 운전자의 연령별 구분에 따른 할증도 막대합니다. 만 21세 이하 신규 운전 사원이나 만 26세 미만의 젊은 사원들이 주도적으로 차량을 공유하는 스타트업 같은 기업들은, 숙련도가 축적된 만 30세 이상 내지는 40대 전용 중소기업 임원 전용 보험 요율 구조에 비해 연간 평균 납입 금액 차이가 백만 원 이상 훨씬 비싼 편입니다. 그렇기 때문에 연간 법인차 평균 운용 비용 한도를 산출하기 전에 다양한 차종의 다이렉트 실시간 견적 조회를 여러 군데 거쳐 제일 합리적인 가성비 가입 경로를 모색해두는 과정이 꼭 요구됩니다.</p>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>차량 모델 분류</th>
+                            <th>임직원 최저 나이대</th>
+                            <th>다이렉트 연간 평균 가격</th>
+                            <th>오프라인 설계사 대비 차이점</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>국산 준중형/중형급 (아반떼, 쏘나타)</td>
+                            <td>만 30세 이상 한정</td>
+                            <td>약 85만 원 - 110만 원</td>
+                            <td>평균 15퍼센트 가량 추가 할인 적용</td>
+                        </tr>
+                        <tr>
+                            <td>국산 대형 세단/SUV (그랜저, GV80)</td>
+                            <td>만 26세 이상 한정</td>
+                            <td>약 130만 원 - 160만 원</td>
+                            <td>오프라인 가입 대비 약 25만 원 절감</td>
+                        </tr>
+                        <tr>
+                            <td>수입 고급 세단 (벤츠 E클래스, BMW 5시리즈)</td>
+                            <td>만 30세 이상 임원</td>
+                            <td>약 190만 원 - 240만 원</td>
+                            <td>자차 특약 가입 시 수수료 세이브율 극대화</td>
+                        </tr>
+                        <tr>
+                            <td>초고가 럭셔리카 (취득가 1억 원 초과 모델)</td>
+                            <td>만 30세 이상 지정</td>
+                            <td>약 350만 원 이상</td>
+                            <td>다이렉트 상품군 중 특정 브랜드 선택 한정</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h2 id="section_discount">제4장: 할인 특약 및 다이렉트 싼곳 선정을 위한 공식 가이드</h2>
+                <p>다이렉트 사이트를 통하여 기업용 차량을 계약할 때에는 개인이 가입할 수 있는 대부분의 세액 경감 및 납부 면제 특약들을 법인 전용의 포맷에 맞게 적재적소에 배정해야 최대 효율을 끌어낼 수 있습니다. 가장 먼저 챙겨야 할 것은 단연 주행거리 연동 할인 마일리지 약정입니다. 법인 소유 차량이라도 현장 출장이 잦지 않고 정해진 연간 1만 5천 킬로미터 이하의 짧은 출퇴근 거리만 반복한다면, 주행 기록 환산 검증을 거쳐 만기 정산 시 납입금의 최대 30퍼센트 이상을 다시 돌려받는 현금 환급 혜택을 획득하게 됩니다.</p>
+                <p>그 외에도 차량 내부에 완벽히 장착된 전방 차량 충돌 차단 보조 장치나 차선 이탈 방지 경고 어플, 후측방 추돌 긴급 제어 시스템 같은 첨단 안전 운전 ADAS 관련 특별 조항과 도난 방지용 블랙박스 상시 작동 특별 할인 혜택까지 놓치지 말고 일체 등록해두는 것이 좋습니다. 또한 요즘 대기업과 혁신 핀테크 플랫폼이 합작하여 안전운전 데이터(티맵 안전운전 점수, 카카오 내비 등 스마트폰 내비게이션 점수)를 바탕으로 보험 요금 자체를 직접 깎아주는 UBI 특별 요율 적용을 활용하여 납부 금액을 단돈 만 원이라도 더 깎는 노력이 필요합니다.</p>
+
+                <h2 id="section_compare">제5장: 인터넷 다이렉트 가입의 장점과 단점 (오프라인 설계사 비교)</h2>
+                <p>법인 담당자가 자동차보험 다이렉트 법인 상품의 가입 종류를 정할 때 오프라인과 온라인 가맹 채널의 장단점을 명확히 알아두어야만 예기치 않은 세무상 실수를 방지할 수 있습니다. 인터넷 다이렉트 가입의 가장 큰 장점은 무엇보다도 저렴한 기본 요율입니다. 설계사를 사이에 두지 않고 직접 계약 사항을 채워 나가기 때문에 오프라인 정가 대비 일괄적으로 15에서 20퍼센트까지 낮아진 가격 경쟁력을 유지합니다. 게다가 신규 계약 성사 시 지급되는 제휴 주유 상품권이나 온라인 페이백 혜택, 모바일 백화점 상품권 등 쏠쏠한 사은품 지원과 이벤트를 만끽할 수 있는 점도 소소한 강점입니다.</p>
+                <p>하지만 단점 역시 명확히 존재함을 간과해서는 안 됩니다. 법인차량 대수가 단 한 대가 아닌 수십 대 규모로 늘어나는 대형 법인 업체의 경우, 차량 각각의 유지 보수와 갱신 주기 알림 관리, 그리고 사고 났을 때 법률 분쟁 보상 승인 처리를 매번 실무 담당 직원이 수동으로 일일이 해결해야 하므로 업무 가중이라는 장벽을 만나게 됩니다. 또한 계약 과정에서 특약 설정을 본인의 실수로 임직원 전용이 아닌 누구나 운전으로 잘못 체크하는 순간 세무조사 타겟이 되는 손금불산입 세금 과징금 사태가 터질 위험도 있습니다. 따라서 10대 미만의 소규모 법인이라면 다이렉트 인터넷 사이트가 절대적으로 추천되지만, 그 이상의 규모를 지닌 전문 관리 기업이라면 종합적인 업무 위탁이 가능한 b2b 전문 가입 업체의 1대1 전문 상담을 통한 가계약 설계 컨설팅도 현명한 선택지가 됩니다.</p>
+
+                <h2 id="section_community">제6장: 보배드림, 디시인사이드, 에펨코리아 실사용자 내돈내산 가입 후기</h2>
+                <p>국내 최정상급 자동차 전문 소셜 미디어 커뮤니티인 보배드림의 실무자 전용 게시판이나 네이버 카페, 디시인사이드 차갤 및 관련 갤러리, 에펨코리아, 펨코 등의 유저들이 생산해내는 직장인 내돈내산 리얼 후기를 훑어보면 업무용 다이렉트 가입과 관련된 아주 실효성 있는 요령들이 많이 산재해 있습니다. 후기 작성자들은 신입 담당자가 가장 자주 저지르는 실책으로 다름 아닌 만기 도래 이전에 신용카드사 캐시백 적립 이벤트나 현금지원 사은품 유치 혜택만을 성급하게 뒤쫓다가 가장 중요한 운전자 기명 범위를 소홀히 한 채 계약을 종결 짓는 상황을 지적하고 있습니다.</p>
+                <p>일부 온라인 커뮤니티 유저의 실제 후기에 따르면, 벤츠나 제네시스 등의 고급 사양 모델을 운용하면서 매년 갱신 철마다 전년도 보험사의 안전 점수 할인 혜택 유지가 되지 않아 다른 브랜드 손해보험사로 이탈했더니 약 45만 원을 절약할 수 있었다는 소중한 정보도 확인할 수 있습니다. 특히 구글이나 유튜브 상에 업로드되는 최신 가입 팁 영상 자료를 보면서 매달 손해보험협회가 공시하는 법인차 만족도 순위를 체크하고 가급적 긴급 출동 속도와 보상 접수 친절도가 우수하다는 호평이 누적된 업체를 선택하여 최종 도장을 찍는 것이 사후 조치 예방을 도모하는 유일무이한 길이라는 여론이 절대 다수를 형성하고 있습니다.</p>
+
+                <h2 id="section_ai">제7장: 2026년 첨단 AI 기술과 연계된 법인 차량 운용 변화</h2>
+                <p>2026년에 도래한 미래형 비즈니스 모빌리티 업계에서는 인공지능 기술의 진보를 바탕으로 업무용 차량의 관리 편의성이 비약적으로 도약하고 있습니다. 이제 챗지피티 나 구글의 제미나이 등 고도화된 생성형 AI 비서 및 핀테크 플랫폼이 손해보험사 가입 알고리즘과 상호 긴밀하게 연동되어, 법인 소유 차량의 세부적인 블랙박스 원격 데이터 수집 장치와 결합되고 있습니다. 이러한 AI 기술의 융합은 기업들로 하여금 매일 발생한 주행 이력과 급정거, 급가속 빈도 데이터를 실시간으로 통계 분석하여 임직원들에게 최적화된 안전 주행 가이드를 모바일 카카오톡 메신저나 인스타그램 비즈니스용 전용 서비스, 페이스북 내부 연동 모듈을 통해 데일리 보고서 형태로 전송해줍니다.</p>
+                <p>심지어 토스 앱이나 은행권 핀테크 제휴 연합 사이트에 등록된 법인 전용 차량의 관제 데이터를 AI가 스캐닝하여 올해 주행 완료한 총 운행 거리를 분석하고 최저 요율 다이렉트 싼곳 상품을 자동으로 선별하여 교체 결제를 유도하기도 합니다. 이 같은 융합형 솔루션은 국세청 신고 양식에 필요한 표준 운행일지 기록 의무까지 지능적으로 100퍼센트 자동 대행해주어 직원의 소중한 작업 효율성을 깎아먹지 않는 큰 순기능을 완수하며, 전방위적인 차량 유지 지출 비용을 체계적으로 억제하는 효과를 낳고 있습니다.</p>
+
+                <hr>
+
+                <h2 id="section_faq">제8장: 법인 자동차보험 다이렉트 자주 묻는 질문 FAQ</h2>
+                
+                <div class="faq-item">
+                    <p class="faq-question">Q1. 정규직 임직원이 아닌 파트타임 아르바이트 사원이나 단기 인턴 사원도 운전이 가능한가요?</p>
+                    <p class="faq-answer">A. 기본적으로 국세청에서 정한 업무용 승용차 법인 임직원 전용 특약은 '법인의 임직원' 범위에 해당하는 모든 인원에 대해 보장이 가능합니다. 근로소득 원천징수 영수증이나 사원 대장에 명시된 정규직, 임시 계약직, 인턴 및 합법적으로 고용 계약을 맺고 근로 대가를 세무 신고하는 정규 파트타이머는 보장 대상에 적용됩니다. 하지만 정식 근로계약 체결 및 세액 신고를 처리하지 않은 완전히 임의적인 외부 일용직이나 도급 형태의 제3자는 보장에서 온전히 누락되므로 반드시 주의하셔야 합니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q2. 신규 설립한 법인인데 차량 보험을 오프라인 대면에서 다이렉트로 바꾸면 당장 혜택을 볼 수 있나요?</p>
+                    <p class="faq-answer">A. 네, 아주 전격적인 혜택을 즉각적으로 경험하실 수 있습니다. 오프라인 채널은 전통적으로 회사 전담 영업 수수료가 누적되는 반면, 인터넷이나 모바일 전문 채널을 통해 접속하는 다이렉트는 설계 수수료가 일체 공제되므로 첫날 납부하는 예상 기본 견적 금액 차이점이 무조건적으로 최소 15퍼센트 수준에서 확정적으로 저렴하게 계산되어 절감됩니다. 특히 여러 대를 동시에 등록하면 일괄 패키지 할인 혜택이나 다이렉트만의 신규 전환 사은 이벤트를 폭넓게 누릴 수 있어 창업 초기 스타트업에게 가장 필수적인 예산 관리 조치로 꼽힙니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q3. 8,000만 원 이상인데 연두색 번호판을 달지 않은 채로 그냥 다이렉트 자동차보험에 가입해도 세금 처리가 아예 안 되나요?</p>
+                    <p class="faq-answer">A. 그렇습니다. 비록 인터넷 다이렉트를 통하여 정상적으로 자동차보험 체결이 순조롭게 끝났다 하더라도, 취득가 또는 법인 리스 장기 약정가가 8천만 원 이상인데도 번호판을 교체하지 않았다면 국세청 세무 세제 혜택 조건이 충족되지 않은 것으로 판별됩니다. 이 사태가 발각되면 당해 연도 세법에 근거하여 회계상 모든 차량 관련 비용이 부인되어 손금불산입 처리되므로, 보험 가입과 더불어 차량 번호판 장착 작업 역시 즉시 연동하여 한 치의 실수가 없도록 행정 처리를 완료해야만 절세 효과를 완전무결하게 유지할 수 있습니다.</p>
+                </div>
+
+                <div class="faq-item">
+                    <p class="faq-question">Q4. 만약 임직원 중 나이가 어린 사원이 있다면 운전자 범위 연령대를 어떻게 구성하는 게 제일 싼곳 계약에 유리할까요?</p>
+                    <p class="faq-answer">A. 연령 요율은 가입하는 계약 중 '가장 나이가 어린 사원'을 기준으로 정밀하게 하향 평준화 할증이 결정됩니다. 만약 만 24세인 사원이 단 한 명이라도 무제한 운전 가능 자격에 포함된다면 차량 한 대당 책정되는 보험 요금은 최저 요율 등급인 만 30세 지정 조건에 비해 매우 비싸게 인상됩니다. 이런 상황을 예방하려면 해당 고연령층 임직원 전용 차량과 젊은 실무자 전용 차량을 완전하게 분할 지정하여 계약을 각개 분리해 다이렉트 특약을 따로 구성하는 이원화 설계 방안을 세우는 것이 제일 스마트한 자산 방어 논리가 됩니다.</p>
+                </div>
+
+                <div class="external-links">
+                    <h3>공신력 있는 신뢰 기관 안내 및 외부 정보 포털</h3>
+                    <ul>
+                        <li><a href="https://www.nts.go.kr" target="_blank" rel="noopener">국세청 (NTS): 업무용 승용차 세무 가이드라인 및 운행 기록 일지 서식 다운로드</a></li>
+                        <li><a href="https://www.fss.or.kr" target="_blank" rel="noopener">금융감독원 (FSS): 법인 및 임직원 자동차 보험 표준 약관 변경 지침 확인</a></li>
+                        <li><a href="https://www.kidi.or.kr" target="_blank" rel="noopener">보험개발원 (KIDI): 차종별 차량 모델 등급 분석 및 보험 사고 손해 요율 공시 정보</a></li>
+                        <li><a href="https://www.law.go.kr" target="_blank" rel="noopener">국가법령정보센터 (법인세법 시행령): 업무용 차량 비용 인정 요건 법률 전문</a></li>
+                        <li><a href="https://www.molit.go.kr" target="_blank" rel="noopener">국토교통부 (MOLIT): 8천만원 이상 고가 차량 전용 연두색 번호판 장착 기준 고시</a></li>
+                    </ul>
+                </div>
+
+                <p style="text-align: right; color: #94A3B8; font-size: 0.9em; margin-top: 60px;">최종 업데이트 일자: 2026년 6월 19일 (2026년 최신 개정 소득세법 및 국세청 실무 요건 반영 완료)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive JavaScript Engine for Calculations -->
+    <script>
+        function calculateTaxBenefit(event) {
+            event.preventDefault();
+            const carValue = parseFloat(document.getElementById('carValueInput').value);
+            const annualExp = parseFloat(document.getElementById('annualExpInput').value);
+            const insurCheck = document.getElementById('insurCheck').value;
+            const logCheck = document.getElementById('logCheck').value;
+            const resultPanel = document.getElementById('tax_result');
+
+            if (isNaN(carValue) || isNaN(annualExp)) {
+                alert('정확한 정수 값을 입력해주시기 바랍니다.');
+                return;
+            }
+
+            let recognizedAmount = 0;
+            let statusText = "";
+            let penaltyText = "";
+
+            if (insurCheck === 'no') {
+                recognizedAmount = 0;
+                statusText = "임직원 전용 보험 미가입 상태이므로 세법 규정에 의해 비용 인정 비율이 일체 0% 처리됩니다.";
+                penaltyText = "연간 법인 비용 불산입액: " + annualExp + "만 원 (전액 세법상 손금 불인정되어 막대한 추가 법인세가 고지될 수 있습니다)";
+            } else {
+                if (logCheck === 'yes') {
+                    recognizedAmount = annualExp;
+                    statusText = "임직원 전용 보험 가입 및 운행기록 성실 작성 조건이 충족되어 연간 지출 비용 전액인 " + annualExp + "만 원이 업무 비용으로 정상 인정됩니다.";
+                    penaltyText = "연간 법인 비용 불산입액: 0만 원 (안정적인 소득세 및 법인세 이득 극대화 달성)";
+                } else {
+                    const basicLimit = 1500;
+                    if (annualExp <= basicLimit) {
+                        recognizedAmount = annualExp;
+                        statusText = "운행기록부를 작성하지 않았으나, 연간 총 유지비용이 현행 기준 면제 한도인 " + basicLimit + "만 원 이하이므로 전액 경비 수용 가능합니다.";
+                        penaltyText = "연간 법인 비용 불산입액: 0만 원 (1500만 원 이하 경비 통과)";
+                    } else {
+                        recognizedAmount = basicLimit;
+                        const overflow = annualExp - basicLimit;
+                        statusText = "운행기록부 미작성으로 인해 연간 지출액 중 법적 기초 보장 한도인 " + basicLimit + "만 원 까지만 비용으로 최종 허용됩니다.";
+                        penaltyText = "연간 법인 비용 불산입액: " + overflow + "만 원 (초과분은 법인세 계산 시 세액 공제에서 차단되어 누락됩니다)";
+                    }
+                }
+            }
+
+            resultPanel.innerHTML = `
+                <h4>시뮬레이션 분석 결과</h4>
+                <p>세무 평가: ${statusText}</p>
+                <p style="font-weight: 800; color: #EA580C;">${penaltyText}</p>
+                <p style="font-size: 0.85em; color: #475569;">※ 본 예측치는 2026년 현행 법인세 규정을 따르는 가상 시뮬레이션 결과로, 세무 회계 사무실의 실제 계산 및 증빙 서류에 따라 일부 달라질 수 있습니다.</p>
+            `;
+            resultPanel.style.display = 'block';
+        }
+
+        function estimateCorporatePremium(event) {
+            event.preventDefault();
+            const segment = document.getElementById('vehicleSegment').value;
+            const age = document.getElementById('driverAgeRange').value;
+            const size = parseInt(document.getElementById('fleetSize').value);
+            const resultPanel = document.getElementById('premium_result');
+
+            if (isNaN(size) || size < 1) {
+                alert('보유 중인 법인 차량의 수량을 정확히 숫자로 입력해 주십시오.');
+                return;
+            }
+
+            let basePremium = 100;
+            if (segment === 'medium') basePremium = 150;
+            if (segment === 'luxury') basePremium = 280;
+
+            let ageMultiplier = 1.0;
+            if (age === '20') ageMultiplier = 1.8;
+            if (age === '26') ageMultiplier = 1.3;
+            if (age === '30') ageMultiplier = 0.95;
+
+            let bulkDiscount = 1.0;
+            if (size >= 10) bulkDiscount = 0.90; 
+            else if (size >= 3) bulkDiscount = 0.95;
+
+            const expectedPremium = Math.round(basePremium * ageMultiplier * bulkDiscount);
+            const directPremium = Math.round(expectedPremium * 0.83); 
+            const totalSaved = (expectedPremium - directPremium) * size;
+
+            resultPanel.innerHTML = `
+                <h4>예상 다이렉트 요율 진단 결과</h4>
+                <p>대면 설계 가입 시 차량 1대당 연간 예상 비용: 약 <strong>${expectedPremium}만 원</strong></p>
+                <p style="font-weight: 800; color: #115E59;">다이렉트 전용 인터넷 계약 시 1대당 가격: 약 <strong>${directPremium}만 원</strong></p>
+                <p>보유하신 총 ${size}대 전체 가입 시 다이렉트를 통한 최종 예상 절감 총액: <strong>약 ${totalSaved}만 원</strong></p>
+                <p style="font-size: 0.85em; color: #475569;">※ 본 예상 요금은 표준적 요율을 대변한 시뮬레이션 금액이며, 각 손해보험사의 개별 사고율 통계 및 신규 가입 경력 요건에 따라 다소의 오차가 존재할 수 있습니다.</p>
+            `;
+            resultPanel.style.display = 'block';
+        }
+    </script>
+  
